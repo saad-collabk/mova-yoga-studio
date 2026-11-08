@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5efe7" />
+    <title data-i18n="meta.title">MOVA — йога, движение, баланс</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="scroll-motion.css?v=5" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
+    <script src="scroll-motion.js?v=5" defer></script>
+    <style>
+      :root { color-scheme: light; --ink: #30271f; --paper: #f5efe7; --earth: #805238; --earth-dark: #603f2c; --muted: #685b4f; --serif: "Cormorant Garamond", Georgia, serif; --sans: "Manrope", Arial, sans-serif; --display-weight: 500; --body-weight: 400; --strong-weight: 600; }
+      * { box-sizing: border-box; }
+      html { min-width: 320px; background: var(--paper); }
+      body { min-height: 100svh; margin: 0; color: var(--ink); background: var(--paper); font-family: var(--sans); font-weight: var(--body-weight); }
+      a { color: inherit; text-decoration: none; }
+      a:focus-visible, button:focus-visible { outline: 2px solid var(--earth-dark); outline-offset: 4px; }
+      .site-header { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 22px; padding: 28px 4.3%; }
+      .nav { display: flex; align-items: center; gap: clamp(13px, 2vw, 34px); }
+      .nav a { font-size: clamp(9px, .67vw, 12px); font-weight: 500; letter-spacing: .045em; text-transform: uppercase; white-space: nowrap; }
+      .nav a:hover { color: var(--earth); }
+      .brand { min-width: 150px; text-align: center; }
+      .brand__name { display: block; font: 400 clamp(29px, 3.15vw, 52px)/.85 var(--serif); letter-spacing: .12em; }
+      .brand__motto { display: block; margin-top: 10px; font-size: 8px; letter-spacing: .34em; }
+      .header-actions { display: flex; justify-content: end; align-items: center; gap: 22px; }
+      .language-switch { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); font-size: 11px; letter-spacing: .05em; }
+      .language-switch__divider { width: 1px; height: 27px; margin-right: 13px; background: currentColor; }
+      .language-switch__button { padding: 0; border: 0; color: inherit; background: transparent; font: inherit; cursor: pointer; }
+      .language-switch__button[aria-pressed="true"] { font-weight: 600; }
+      .language-switch__button[aria-pressed="false"] { color: #786c61; }
+      .button { display: inline-flex; min-height: 52px; align-items: center; justify-content: center; gap: 15px; padding: 0 28px; border: 1px solid transparent; border-radius: 999px; color: #fffaf4; background: var(--earth); font: var(--strong-weight) 13px/1 var(--sans); transition: background-color 180ms ease, transform 180ms ease; }
+      .button:hover { background: var(--earth-dark); transform: translateY(-1px); }
+      .button--header { min-width: 172px; border-color: #f7f1e9; }
+      .arrow { width: 18px; height: 18px; flex: none; }
+      .detail-shell { padding: 34px 4.3% 72px; }
+      .back-link { display: inline-flex; align-items: center; gap: 12px; color: var(--earth); font-size: 11px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; }
+      .back-link svg { width: 16px; height: 16px; transform: rotate(180deg); }
+      .detail-grid { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(380px, .88fr); gap: clamp(34px, 6vw, 100px); align-items: stretch; margin-top: 23px; }
+      .detail-media { min-height: 620px; overflow: hidden; border-radius: 12px; background: #d6c0aa; }
+      .detail-media img { display: block; width: 100%; height: 100%; min-height: 620px; object-fit: cover; object-position: center; }
+      .detail-copy { display: flex; flex-direction: column; justify-content: center; padding: 18px 4% 18px 0; }
+      .detail-eyebrow { margin: 0 0 24px; color: var(--earth); font-size: 10px; font-weight: 500; letter-spacing: .34em; text-transform: uppercase; }
+      .detail-title { max-width: 650px; margin: 0; font: var(--display-weight) clamp(58px, 6.2vw, 96px)/.88 var(--serif); letter-spacing: -.04em; }
+      .detail-tag { margin: 19px 0 0; color: var(--earth); font-size: 11px; font-weight: 500; letter-spacing: .25em; text-transform: uppercase; }
+      .detail-description { max-width: 560px; margin: 28px 0 0; color: var(--muted); font-size: clamp(15px, 1.05vw, 17px); line-height: 1.75; }
+      .detail-meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 35px 0 0; border-top: 1px solid #cdbbaa; border-bottom: 1px solid #cdbbaa; }
+      .detail-meta__item { padding: 18px 16px 18px 0; }
+      .detail-meta__item + .detail-meta__item { padding-left: 18px; border-left: 1px solid #cdbbaa; }
+      .detail-meta__label { display: block; margin-bottom: 7px; color: #8a7664; font-size: 9px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; }
+      .detail-meta__value { display: block; font: 400 23px/1 var(--serif); }
+      .detail-focus { margin-top: 28px; }
+      .detail-focus h2 { margin: 0 0 11px; font: 500 32px/1 var(--serif); }
+      .detail-focus p { max-width: 570px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+      .detail-benefits { display: flex; flex-wrap: wrap; gap: 9px 24px; margin: 20px 0 0; padding: 0; list-style: none; color: #51463d; font-size: 12px; }
+      .detail-benefits li::before { margin-right: 8px; color: var(--earth); content: "✓"; }
+      .detail-cta { align-self: flex-start; margin-top: 31px; padding-inline: 31px; }
+      .related { margin-top: 83px; padding-top: 31px; border-top: 1px solid #d6c8b8; }
+      .related__heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+      .related__heading h2 { margin: 0; font: 500 clamp(36px, 3.8vw, 56px)/1 var(--serif); }
+      .related__heading p { margin: 0; color: var(--earth); font-size: 10px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; }
+      .related-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin-top: 23px; }
+      .related-card { position: relative; min-height: 210px; overflow: hidden; border-radius: 9px; color: #fffaf4; background: var(--earth-dark); }
+      .related-card::after { position: absolute; inset: 35% 0 0; background: linear-gradient(180deg, transparent, rgb(47 34 24 / 86%)); content: ""; }
+      .related-card img { display: block; width: 100%; height: 100%; min-height: 210px; object-fit: cover; transition: transform 300ms ease; }
+      .related-card:hover img { transform: scale(1.04); }
+      .related-card__copy { position: absolute; z-index: 1; right: 12px; bottom: 14px; left: 14px; }
+      .related-card__title { display: block; font: 400 22px/1 var(--serif); }
+      .related-card__tag { display: block; margin-top: 6px; font-size: 8px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; }
+      @media (max-width: 1050px) { .site-header { padding-inline: 6%; } .nav { gap: 13px; } .header-actions { gap: 14px; } .detail-shell { padding-inline: 6%; } .detail-grid { grid-template-columns: minmax(0, 1fr) minmax(320px, .9fr); gap: 40px; } .detail-media, .detail-media img { min-height: 570px; } .related-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+      @media (max-width: 760px) { .site-header { display: flex; justify-content: center; padding-top: 20px; } .nav, .button--header { display: none; } .detail-shell { padding: 24px 6% 54px; } .detail-grid { grid-template-columns: 1fr; gap: 33px; margin-top: 21px; } .detail-media, .detail-media img { min-height: 430px; } .detail-media img { height: min(125vw, 650px); } .detail-copy { padding: 0; } .detail-title { font-size: clamp(54px, 15vw, 82px); } .detail-meta { margin-top: 27px; } .detail-meta__value { font-size: 20px; } .related { margin-top: 60px; } .related__heading { align-items: flex-start; flex-direction: column; gap: 12px; } .related-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      @media (max-width: 480px) { .detail-media, .detail-media img { min-height: 340px; } .detail-meta__item { padding-right: 8px; } .detail-meta__item + .detail-meta__item { padding-left: 10px; } .detail-meta__label { font-size: 8px; letter-spacing: .13em; } .detail-meta__value { font-size: 17px; } .related-grid { grid-template-columns: 1fr; } }
+      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Навигация по студии">
+        <a href="index.html#about" data-i18n="nav.about">О студии</a>
+        <a href="index.html#classes" data-i18n="nav.classes">Направления</a>
+        <a href="index.html#teachers" data-i18n="nav.teachers">Преподаватели</a>
+        <a href="index.html#schedule" data-i18n="nav.schedule">Расписание</a>
+      </nav>
+      <a class="brand" href="index.html#studio" aria-label="MOVA — на главную"><span class="brand__name">MOVA</span><span class="brand__motto">YOGA · BODY · BALANCE</span></a>
+      <div class="header-actions">
+        <div class="language-switch" role="group" aria-label="Выбор языка"><span class="language-switch__divider" aria-hidden="true"></span><button class="language-switch__button" type="button" data-language="ru" aria-pressed="true">RU</button><span aria-hidden="true">/</span><button class="language-switch__button" type="button" data-language="en" aria-pressed="false">EN</button></div>
+        <a class="button button--header" href="index.html#book-class"><span data-i18n="actions.book">Записаться</span></a>
+      </div>
+    </header>
+
+    <main class="detail-shell">
+      <a class="back-link" href="index.html#classes"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 10h13M11 4l6 6-6 6" stroke="currentColor" stroke-width="1.2" /></svg><span data-i18n="actions.back">Назад к направлениям</span></a>
+      <section class="detail-grid" aria-labelledby="practice-title">
+        <div class="detail-media"><img id="practice-image" src="practice-flow.jpg" alt="Йога флоу в солнечном зале MOVA" /></div>
+        <article class="detail-copy">
+          <p class="detail-eyebrow" data-i18n="detail.eyebrow">Практики · классы</p>
+          <h1 class="detail-title" id="practice-title">Йога флоу</h1>
+          <p class="detail-tag" id="practice-tag">Движение · энергия</p>
+          <p class="detail-description" id="practice-description">Плавная динамичная практика, которая соединяет дыхание и движение. Помогает развить гибкость, укрепить тело и успокоить ум.</p>
+          <div class="detail-meta">
+            <div class="detail-meta__item"><span class="detail-meta__label" data-i18n="detail.duration">Длительность</span><strong class="detail-meta__value" id="practice-duration">60 минут</strong></div>
+            <div class="detail-meta__item"><span class="detail-meta__label" data-i18n="detail.level">Уровень</span><strong class="detail-meta__value" id="practice-level">Начальный</strong></div>
+            <div class="detail-meta__item"><span class="detail-meta__label" data-i18n="detail.teacher">Ведущий</span><strong class="detail-meta__value" id="practice-teacher">Анна</strong></div>
+          </div>
+          <div class="detail-focus">
+            <h2 data-i18n="detail.focusTitle">О практике</h2>
+            <p id="practice-focus">Мягко разогреваем тело, соединяем движение с дыханием и постепенно выходим в устойчивую последовательность.</p>
+            <ul class="detail-benefits" id="practice-benefits"></ul>
+          </div>
+          <a class="button detail-cta" id="practice-cta" href="index.html#book-class"><span data-i18n="actions.bookClass">Записаться на класс</span><svg class="arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 10h13M11 4l6 6-6 6" stroke="currentColor" stroke-width="1.2" /></svg></a>
+        </article>
+      </section>
+
+      <section class="related" aria-labelledby="related-title">
+        <div class="related__heading"><h2 id="related-title" data-i18n="related.title">Другие практики</h2><p data-i18n="related.note">Выберите свой ритм</p></div>
+        <div class="related-grid" id="related-grid"></div>
+      </section>
+    </main>
+
+    <script>
+      const uiTranslations = {
+        ru: {
+          meta: { title: "MOVA — практика", nav: "Навигация по студии", language: "Выбор языка" },
+          nav: { about: "О студии", classes: "Направления", teachers: "Преподаватели", schedule: "Расписание" },
+          actions: { book: "Записаться", bookClass: "Записаться на класс", back: "Назад к направлениям" },
+          detail: { eyebrow: "Практики · классы", duration: "Длительность", level: "Уровень", teacher: "Ведущий", focusTitle: "О практике" },
+          related: { title: "Другие практики", note: "Выберите свой ритм" }
+        },
+        en: {
+          meta: { title: "MOVA — practice", nav: "Studio navigation", language: "Language selection" },
+          nav: { about: "About studio", classes: "Practices", teachers: "Teachers", schedule: "Schedule" },
+          actions: { book: "Book a class", bookClass: "Book this class", back: "Back to practices" },
+          detail: { eyebrow: "Practices · classes", duration: "Duration", level: "Level", teacher: "Teacher", focusTitle: "About the practice" },
+          related: { title: "More practices", note: "Choose your rhythm" }
+        }
+      };
+
+      const practiceData = {
+        flow: {
+          image: "practice-flow.jpg",
+          ru: { title: "Йога флоу", tag: "Движение · энергия", alt: "Йога флоу в солнечном зале MOVA", description: "Плавная динамичная практика, которая соединяет дыхание и движение. Помогает развить гибкость, укрепить тело и успокоить ум.", duration: "60 минут", level: "Начальный", teacher: "Анна", focus: "Мягко разогреваем тело, соединяем движение с дыханием и постепенно выходим в устойчивую последовательность.", benefits: ["Развить гибкость", "Укрепить тело", "Снизить напряжение"] },
+          en: { title: "Yoga flow", tag: "Movement · energy", alt: "Yoga flow in the sunlit MOVA studio", description: "A fluid, dynamic practice that connects breath and movement. It builds flexibility, strengthens the body, and settles the mind.", duration: "60 minutes", level: "Beginner", teacher: "Anna", focus: "Warm the body gently, connect movement to breath, and move into a steady sequence at your own pace.", benefits: ["Build flexibility", "Strengthen the body", "Release tension"] }
+        },
+        strength: {
+          image: "practice-strength.jpg",
+          ru: { title: "Сила и подвижность", tag: "Сила · стабильность", alt: "Практика силы и подвижности в зале MOVA", description: "Функциональная практика для сильного, устойчивого тела и свободного движения без лишнего напряжения.", duration: "55 минут", level: "Средний", teacher: "Мария", focus: "Работаем с опорой, контролем и диапазоном движения, чтобы сила помогала двигаться легче каждый день.", benefits: ["Укрепить мышцы", "Улучшить осанку", "Развить стабильность"] },
+          en: { title: "Strength & mobility", tag: "Strength · stability", alt: "Strength and mobility practice in the MOVA studio", description: "A functional practice for a strong, steady body and freer movement without unnecessary tension.", duration: "55 minutes", level: "Intermediate", teacher: "Maria", focus: "Work with support, control, and range of motion so strength makes everyday movement feel easier.", benefits: ["Build strength", "Improve posture", "Develop stability"] }
+        },
+        stretch: {
+          image: "practice-stretch.jpg",
+          ru: { title: "Растяжка и восстановление", tag: "Гибкость · расслабление", alt: "Растяжка и восстановление в светлой студии MOVA", description: "Спокойная практика для бережного раскрытия тела, восстановления после нагрузки и возвращения ощущения лёгкости.", duration: "50 минут", level: "Любой", teacher: "Елена", focus: "Двигаемся медленно, остаёмся внимательными к ощущениям и даём мышцам время отпустить накопившееся напряжение.", benefits: ["Вернуть лёгкость", "Улучшить гибкость", "Восстановить дыхание"] },
+          en: { title: "Stretch & recovery", tag: "Flexibility · release", alt: "Stretch and recovery in the bright MOVA studio", description: "A calm practice for opening the body gently, recovering after effort, and returning to a feeling of ease.", duration: "50 minutes", level: "All levels", teacher: "Elena", focus: "Move slowly, stay close to sensation, and give the muscles time to release built-up tension.", benefits: ["Restore ease", "Improve flexibility", "Reset the breath"] }
+        },
+        breathwork: {
+          image: "practice-breathwork.jpg",
+          ru: { title: "Дыхательные практики", tag: "Спокойствие · осознанность", alt: "Спокойная дыхательная практика в MOVA", description: "Время замедлиться, настроить дыхание и вернуть ясность, спокойствие и ощущение внутренней опоры.", duration: "45 минут", level: "Любой", teacher: "София", focus: "Осваиваем простые дыхательные техники и мягкое внимание к телу, которые можно унести с собой в обычный день.", benefits: ["Успокоить нервную систему", "Улучшить концентрацию", "Глубже чувствовать тело"] },
+          en: { title: "Breathwork", tag: "Calm · awareness", alt: "Calm breathwork practice at MOVA", description: "Time to slow down, tune the breath, and return to clarity, calm, and a grounded inner feeling.", duration: "45 minutes", level: "All levels", teacher: "Sofia", focus: "Learn simple breathing techniques and gentle body awareness you can carry into everyday life.", benefits: ["Calm the nervous system", "Improve focus", "Feel the body more deeply"] }
+        },
+        meditation: {
+          image: "practice-meditation.jpg",
+          ru: { title: "Медитация", tag: "Внутренний баланс", alt: "Медитация в залитом солнцем зале MOVA", description: "Практика тишины и присутствия, которая помогает отпустить спешку и услышать собственный ритм.", duration: "40 минут", level: "Любой", teacher: "Ирина", focus: "Садимся удобно, наблюдаем за дыханием и возвращаем внимание к настоящему моменту без оценки и давления.", benefits: ["Снизить уровень стресса", "Развить внимание", "Найти внутреннюю тишину"] },
+          en: { title: "Meditation", tag: "Inner balance", alt: "Meditation in the sunlit MOVA studio", description: "A practice of quiet presence that helps release hurry and listen to your own rhythm.", duration: "40 minutes", level: "All levels", teacher: "Irina", focus: "Sit comfortably, notice the breath, and return to the present moment without judgment or pressure.", benefits: ["Reduce stress", "Develop attention", "Find inner quiet"] }
+        },
+        all: {
+          image: "optimized/studio-about.jpg",
+          ru: { title: "Все классы", tag: "Найдите свою практику", alt: "Солнечное пространство для занятий в студии MOVA", description: "Собрали все направления MOVA в одном месте — от динамичной йоги до тихой медитации. Выберите практику под своё состояние и цель.", duration: "40–60 минут", level: "Любой", teacher: "Команда MOVA", focus: "Начните с того, что откликается сегодня. Можно пробовать разные направления и собирать собственный ритм занятий.", benefits: ["Познакомиться с направлениями", "Выбрать свой темп", "Заниматься регулярно"] },
+          en: { title: "All classes", tag: "Find your practice", alt: "Sunlit practice space at the MOVA studio", description: "Explore every MOVA direction in one place, from dynamic yoga to quiet meditation. Choose a practice for your mood and goal.", duration: "40–60 minutes", level: "All levels", teacher: "MOVA team", focus: "Start with what feels right today. Try different directions and build a rhythm that belongs to you.", benefits: ["Explore every direction", "Choose your pace", "Practice consistently"] }
+        }
+      };
+
+      const currentPractice = practiceData[new URLSearchParams(location.search).get("practice")] ? new URLSearchParams(location.search).get("practice") : "flow";
+      const languageButtons = [...document.querySelectorAll("[data-language]")];
+      const translatableNodes = [...document.querySelectorAll("[data-i18n]")];
+      const getTranslation = (dictionary, key) => key.split(".").reduce((value, part) => value?.[part], dictionary);
+      const practiceImage = document.querySelector("#practice-image");
+      const practiceTitle = document.querySelector("#practice-title");
+      const practiceTag = document.querySelector("#practice-tag");
+      const practiceDescription = document.querySelector("#practice-description");
+      const practiceDuration = document.querySelector("#practice-duration");
+      const practiceLevel = document.querySelector("#practice-level");
+      const practiceTeacher = document.querySelector("#practice-teacher");
+      const practiceFocus = document.querySelector("#practice-focus");
+      const practiceBenefits = document.querySelector("#practice-benefits");
+      const practiceCta = document.querySelector("#practice-cta");
+      const relatedGrid = document.querySelector("#related-grid");
+
+      function renderRelated(language) {
+        relatedGrid.innerHTML = Object.entries(practiceData).map(([key, item]) => `<a class="related-card" href="class.html?practice=${key}"><img src="${item.image}" srcset="${item.image.replace(".jpg","-sm.jpg")} 1x, ${item.image} 2x" alt="${item[language].alt}" loading="lazy" /><span class="related-card__copy"><span class="related-card__title">${item[language].title}</span><span class="related-card__tag">${item[language].tag}</span></span></a>`).join("");
+      }
+
+      function setLanguage(language) {
+        const selectedLanguage = uiTranslations[language] ? language : "ru";
+        const dictionary = uiTranslations[selectedLanguage];
+        const practice = practiceData[currentPractice][selectedLanguage];
+        localStorage.setItem("mova-language", selectedLanguage);
+        translatableNodes.forEach((node) => { const value = getTranslation(dictionary, node.dataset.i18n); if (value !== undefined) node.textContent = value; });
+        languageButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.language === selectedLanguage)));
+        document.documentElement.lang = selectedLanguage;
+        document.title = `${practice.title} — MOVA`;
+        document.querySelector(".nav").setAttribute("aria-label", dictionary.meta.nav);
+        document.querySelector(".language-switch").setAttribute("aria-label", dictionary.meta.language);
+        practiceImage.src = practiceData[currentPractice].image;
+        practiceImage.alt = practice.alt;
+        practiceTitle.textContent = practice.title;
+        practiceTag.textContent = practice.tag;
+        practiceDescription.textContent = practice.description;
+        practiceDuration.textContent = practice.duration;
+        practiceLevel.textContent = practice.level;
+        practiceTeacher.textContent = practice.teacher;
+        practiceFocus.textContent = practice.focus;
+        practiceBenefits.innerHTML = practice.benefits.map((benefit) => `<li>${benefit}</li>`).join("");
+        practiceCta.href = `index.html?practice=${encodeURIComponent(currentPractice)}#book-class`;
+        renderRelated(selectedLanguage);
+      }
+
+      languageButtons.forEach((button) => button.addEventListener("click", () => setLanguage(button.dataset.language)));
+      setLanguage(localStorage.getItem("mova-language") || "ru");
+    </script>
+  </body>
+</html>

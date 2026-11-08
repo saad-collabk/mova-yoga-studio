@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5efe7" />
+    <title data-i18n="meta.title">Преподаватель — MOVA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="scroll-motion.css?v=5" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
+    <script src="scroll-motion.js?v=5" defer></script>
+    <style>
+      :root { color-scheme: light; --ink: #30271f; --paper: #f5efe7; --earth: #805238; --earth-dark: #603f2c; --muted: #685b4f; --line: #d2bfaa; --serif: "Cormorant Garamond", Georgia, serif; --sans: "Manrope", Arial, sans-serif; --display-weight: 500; --body-weight: 400; --strong-weight: 600; }
+      * { box-sizing: border-box; }
+      html { min-width: 320px; background: var(--paper); }
+      body { min-height: 100svh; margin: 0; color: var(--ink); background: var(--paper); font-family: var(--sans); font-weight: var(--body-weight); }
+      a { color: inherit; text-decoration: none; }
+      a:focus-visible, button:focus-visible { outline: 2px solid var(--earth-dark); outline-offset: 4px; }
+      .site-header { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 22px; padding: 28px 4.3%; }
+      .nav { display: flex; align-items: center; gap: clamp(13px, 2vw, 34px); }
+      .nav a { font-size: clamp(9px, .67vw, 12px); font-weight: 500; letter-spacing: .045em; text-transform: uppercase; white-space: nowrap; }
+      .nav a:hover { color: var(--earth); }
+      .brand { min-width: 150px; text-align: center; }
+      .brand__name { display: block; font: 400 clamp(29px, 3.15vw, 52px)/.85 var(--serif); letter-spacing: .12em; }
+      .brand__motto { display: block; margin-top: 10px; font-size: 8px; letter-spacing: .34em; }
+      .header-actions { display: flex; justify-content: end; align-items: center; gap: 22px; }
+      .language-switch { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); font-size: 11px; letter-spacing: .05em; }
+      .language-switch__divider { width: 1px; height: 27px; margin-right: 13px; background: currentColor; }
+      .language-switch__button { padding: 0; border: 0; color: inherit; background: transparent; font: inherit; cursor: pointer; }
+      .language-switch__button[aria-pressed="true"] { font-weight: 600; }
+      .language-switch__button[aria-pressed="false"] { color: #786c61; }
+      .button { display: inline-flex; min-height: 52px; align-items: center; justify-content: center; gap: 15px; padding: 0 28px; border: 1px solid transparent; border-radius: 999px; color: #fffaf4; background: var(--earth); font: var(--strong-weight) 13px/1 var(--sans); transition: background-color 180ms ease, transform 180ms ease; }
+      .button:hover { background: var(--earth-dark); transform: translateY(-1px); }
+      .button--header { min-width: 172px; border-color: #f7f1e9; }
+      .arrow { width: 18px; height: 18px; flex: none; }
+      .profile-shell { padding: 33px 4.3% 80px; }
+      .back-link { display: inline-flex; align-items: center; gap: 12px; color: var(--earth); font-size: 11px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; }
+      .back-link svg { width: 16px; height: 16px; transform: rotate(180deg); }
+      .profile-grid { display: grid; grid-template-columns: minmax(0, .78fr) minmax(430px, 1.22fr); gap: clamp(42px, 7vw, 120px); align-items: center; margin-top: 24px; }
+      .profile-photo { min-height: 650px; overflow: hidden; border-radius: 14px; background: #d5c0a8; }
+      .profile-photo img { display: block; width: 100%; height: 100%; min-height: 650px; object-fit: cover; object-position: center 18%; }
+      .profile-copy { padding-right: 5%; }
+      .profile-eyebrow { margin: 0 0 24px; color: var(--earth); font-size: 10px; font-weight: 500; letter-spacing: .36em; text-transform: uppercase; }
+      .profile-name { max-width: 760px; margin: 0; font: var(--display-weight) clamp(58px, 6.7vw, 102px)/.87 var(--serif); letter-spacing: -.045em; }
+      .profile-specialty { margin: 19px 0 0; color: var(--earth); font-size: 12px; font-weight: 500; letter-spacing: .25em; text-transform: uppercase; }
+      .profile-quote { max-width: 610px; margin: 29px 0 0; font: 400 clamp(25px, 2.2vw, 36px)/1.1 var(--serif); }
+      .profile-bio { max-width: 620px; margin: 23px 0 0; color: var(--muted); font-size: 15px; line-height: 1.8; }
+      .profile-meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 34px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+      .profile-meta__item { padding: 17px 14px 17px 0; }
+      .profile-meta__item + .profile-meta__item { padding-left: 16px; border-left: 1px solid var(--line); }
+      .profile-meta__label { display: block; margin-bottom: 7px; color: #8a7664; font-size: 9px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+      .profile-meta__value { display: block; font: 400 21px/1.05 var(--serif); }
+      .profile-approach { margin-top: 29px; }
+      .profile-approach h2 { margin: 0 0 10px; font: 500 33px/1 var(--serif); }
+      .profile-approach p { max-width: 620px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+      .profile-pill-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 19px 0 0; padding: 0; list-style: none; }
+      .profile-pill-list li { padding: 8px 13px; border: 1px solid #c8b39c; border-radius: 999px; color: #5c4c3e; font-size: 11px; font-weight: 500; }
+      .profile-cta { margin-top: 31px; }
+      .related { margin-top: 88px; padding-top: 31px; border-top: 1px solid #d6c8b8; }
+      .related__heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+      .related__heading h2 { margin: 0; font: 500 clamp(37px, 3.8vw, 56px)/1 var(--serif); }
+      .related__heading p { margin: 0; color: var(--earth); font-size: 10px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; }
+      .related-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; margin-top: 23px; }
+      .related-card { overflow: hidden; border: 1px solid rgb(184 162 137 / 30%); border-radius: 12px; background: #fbf7f1; transition: transform 180ms ease; }
+      .related-card:hover { transform: translateY(-3px); }
+      .related-card img { display: block; width: 100%; aspect-ratio: .78; object-fit: cover; object-position: center 18%; }
+      .related-card__copy { display: block; padding: 12px 12px 15px; }
+      .related-card__title { display: block; font: 400 21px/1 var(--serif); }
+      .related-card__tag { display: block; margin-top: 6px; color: var(--earth); font-size: 9px; font-weight: 500; line-height: 1.3; }
+      @media (max-width: 1050px) { .site-header { padding-inline: 6%; } .nav { gap: 13px; } .header-actions { gap: 14px; } .profile-shell { padding-inline: 6%; } .profile-grid { grid-template-columns: minmax(0, .85fr) minmax(320px, 1.15fr); gap: 45px; } .profile-photo, .profile-photo img { min-height: 560px; } .related-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+      @media (max-width: 760px) { .site-header { display: flex; justify-content: center; padding-top: 20px; } .nav, .button--header { display: none; } .profile-shell { padding: 24px 6% 55px; } .profile-grid { grid-template-columns: 1fr; gap: 34px; margin-top: 22px; } .profile-photo, .profile-photo img { min-height: 430px; } .profile-photo img { height: min(125vw, 680px); } .profile-copy { padding: 0; } .profile-name { font-size: clamp(54px, 15vw, 85px); } .profile-meta { margin-top: 28px; } .profile-meta__value { font-size: 18px; } .related { margin-top: 62px; } .related__heading { align-items: flex-start; flex-direction: column; gap: 11px; } .related-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      @media (max-width: 480px) { .profile-photo, .profile-photo img { min-height: 350px; } .profile-meta__label { font-size: 8px; letter-spacing: .12em; } .profile-meta__value { font-size: 16px; } .related-grid { grid-template-columns: 1fr; } }
+      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Навигация по студии">
+        <a href="index.html#about" data-i18n="nav.about">О студии</a>
+        <a href="index.html#classes" data-i18n="nav.classes">Направления</a>
+        <a href="index.html#teachers" data-i18n="nav.teachers">Преподаватели</a>
+        <a href="index.html#schedule" data-i18n="nav.schedule">Расписание</a>
+      </nav>
+      <a class="brand" href="index.html#studio" aria-label="MOVA — на главную"><span class="brand__name">MOVA</span><span class="brand__motto">YOGA · BODY · BALANCE</span></a>
+      <div class="header-actions">
+        <div class="language-switch" role="group" aria-label="Выбор языка"><span class="language-switch__divider" aria-hidden="true"></span><button class="language-switch__button" type="button" data-language="ru" aria-pressed="true">RU</button><span aria-hidden="true">/</span><button class="language-switch__button" type="button" data-language="en" aria-pressed="false">EN</button></div>
+        <a class="button button--header" href="https://wa.me/?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D0%BF%D1%80%D0%BE%D0%B1%D0%BD%D0%BE%D0%B5%20%D0%B7%D0%B0%D0%BD%D1%8F%D1%82%D0%B8%D0%B5" target="_blank" rel="noreferrer"><span data-i18n="actions.book">Записаться</span></a>
+      </div>
+    </header>
+
+    <main class="profile-shell">
+      <a class="back-link" href="index.html#teachers"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 10h13M11 4l6 6-6 6" stroke="currentColor" stroke-width="1.2" /></svg><span data-i18n="actions.back">Назад к преподавателям</span></a>
+      <section class="profile-grid" aria-labelledby="teacher-name">
+        <div class="profile-photo"><img id="teacher-image" src="optimized/teacher-anna.jpg" alt="Анна Смирнова" /></div>
+        <article class="profile-copy">
+          <p class="profile-eyebrow" data-i18n="profile.eyebrow">Преподаватели · MOVA</p>
+          <h1 class="profile-name" id="teacher-name">Анна Смирнова</h1>
+          <p class="profile-specialty" id="teacher-specialty">Йога флоу</p>
+          <p class="profile-quote" id="teacher-quote">Движение становится практикой, когда в нём есть внимание.</p>
+          <p class="profile-bio" id="teacher-bio">Анна помогает ученикам почувствовать опору, мягко раскрыть тело и найти удовольствие в регулярном движении.</p>
+          <div class="profile-meta">
+            <div class="profile-meta__item"><span class="profile-meta__label" data-i18n="profile.experience">Опыт</span><strong class="profile-meta__value" id="teacher-experience">8 лет</strong></div>
+            <div class="profile-meta__item"><span class="profile-meta__label" data-i18n="profile.format">Формат</span><strong class="profile-meta__value" id="teacher-format">Группы и персонально</strong></div>
+            <div class="profile-meta__item"><span class="profile-meta__label" data-i18n="profile.direction">Направление</span><strong class="profile-meta__value" id="teacher-direction">Йога флоу</strong></div>
+          </div>
+          <div class="profile-approach"><h2 data-i18n="profile.approachTitle">Подход</h2><p id="teacher-approach">На занятиях мы соединяем дыхание и движение, чтобы тело становилось сильнее, а внимание — спокойнее.</p><ul class="profile-pill-list" id="teacher-focus"></ul></div>
+          <a class="button profile-cta" id="teacher-cta" href="https://wa.me/" target="_blank" rel="noreferrer"><span data-i18n="actions.bookWith">Записаться к преподавателю</span><svg class="arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 10h13M11 4l6 6-6 6" stroke="currentColor" stroke-width="1.2" /></svg></a>
+        </article>
+      </section>
+
+      <section class="related" aria-labelledby="related-title">
+        <div class="related__heading"><h2 id="related-title" data-i18n="related.title">Другие преподаватели</h2><p data-i18n="related.note">Найдите своего наставника</p></div>
+        <div class="related-grid" id="related-grid"></div>
+      </section>
+    </main>
+
+    <script>
+      const uiTranslations = {
+        ru: {
+          meta: { title: "Преподаватель — MOVA", nav: "Навигация по студии", language: "Выбор языка" },
+          nav: { about: "О студии", classes: "Направления", teachers: "Преподаватели", schedule: "Расписание" },
+          actions: { book: "Записаться", bookWith: "Записаться к преподавателю", back: "Назад к преподавателям" },
+          profile: { eyebrow: "Преподаватели · MOVA", experience: "Опыт", format: "Формат", direction: "Направление", approachTitle: "Подход" },
+          related: { title: "Другие преподаватели", note: "Найдите своего наставника" }
+        },
+        en: {
+          meta: { title: "Teacher — MOVA", nav: "Studio navigation", language: "Language selection" },
+          nav: { about: "About studio", classes: "Practices", teachers: "Teachers", schedule: "Schedule" },
+          actions: { book: "Book a class", bookWith: "Book with this teacher", back: "Back to teachers" },
+          profile: { eyebrow: "Teachers · MOVA", experience: "Experience", format: "Format", direction: "Practice", approachTitle: "Approach" },
+          related: { title: "Other teachers", note: "Find your guide" }
+        }
+      };
+
+      const teacherData = {
+        anna: {
+          image: "optimized/teacher-anna.jpg",
+          ru: { name: "Анна Смирнова", specialty: "Йога флоу", alt: "Анна Смирнова в полном оливковом костюме для йоги", quote: "Движение становится практикой, когда в нём есть внимание.", bio: "Анна помогает ученикам почувствовать опору, мягко раскрыть тело и найти удовольствие в регулярном движении.", experience: "8 лет", format: "Группы и персонально", direction: "Йога флоу", approach: "На занятиях мы соединяем дыхание и движение, чтобы тело становилось сильнее, а внимание — спокойнее.", focus: ["Осознанное движение", "Мягкая сила", "Связь с дыханием"] },
+          en: { name: "Anna Smirnova", specialty: "Yoga flow", alt: "Anna Smirnova in a full olive yoga tracksuit", quote: "Movement becomes practice when it carries attention.", bio: "Anna helps students feel supported, open the body gently, and find pleasure in consistent movement.", experience: "8 years", format: "Group & private", direction: "Yoga flow", approach: "Her classes connect breath and movement so the body grows stronger while the mind becomes quieter.", focus: ["Mindful movement", "Gentle strength", "Breath connection"] }
+        },
+        elena: {
+          image: "optimized/teacher-elena.jpg",
+          ru: { name: "Елена Ковалёва", specialty: "Пилатес", alt: "Елена Ковалёва в полном сером костюме для тренировок", quote: "Сила начинается с точности и уважения к телу.", bio: "Елена создаёт ясные и внимательные занятия, где можно укреплять тело в своём темпе и без лишнего напряжения.", experience: "10 лет", format: "Группы и персонально", direction: "Пилатес", approach: "Мы работаем с центром, осанкой и контролем движения, чтобы повседневная жизнь стала свободнее.", focus: ["Сильный центр", "Осанка", "Контроль движения"] },
+          en: { name: "Elena Kovaleva", specialty: "Pilates", alt: "Elena Kovaleva in a full charcoal training tracksuit", quote: "Strength begins with precision and respect for the body.", bio: "Elena creates clear, attentive classes where you can build strength at your own pace without unnecessary tension.", experience: "10 years", format: "Group & private", direction: "Pilates", approach: "We work with the center, posture, and control so everyday movement feels freer.", focus: ["Strong center", "Posture", "Movement control"] }
+        },
+        maria: {
+          image: "optimized/teacher-maria.jpg",
+          ru: { name: "Мария Лебедева", specialty: "Медитация", alt: "Мария Лебедева в полном кремовом костюме для медитации", quote: "Тишина помогает услышать то, что уже есть внутри.", bio: "Мария бережно ведёт к спокойствию через дыхание, наблюдение и простые практики присутствия.", experience: "7 лет", format: "Группы и персонально", direction: "Медитация", approach: "На встречах мы замедляемся, возвращаем внимание к настоящему и оставляем пространство для себя.", focus: ["Внимание", "Спокойствие", "Внутренняя опора"] },
+          en: { name: "Maria Lebedeva", specialty: "Meditation", alt: "Maria Lebedeva in a full cream meditation tracksuit", quote: "Stillness helps us hear what is already within.", bio: "Maria gently guides students toward calm through breath, observation, and simple presence practices.", experience: "7 years", format: "Group & private", direction: "Meditation", approach: "We slow down, return attention to the present, and make space for ourselves.", focus: ["Attention", "Calm", "Inner support"] }
+        },
+        dmitry: {
+          image: "optimized/teacher-dmitry.jpg",
+          ru: { name: "Дмитрий Орлов", specialty: "Дыхательные практики", alt: "Дмитрий Орлов в полном бежевом костюме для тренировок", quote: "Дыхание — самый простой путь вернуться к себе.", bio: "Дмитрий показывает, как дыхание может поддерживать энергию, концентрацию и устойчивость в течение дня.", experience: "9 лет", format: "Группы и персонально", direction: "Дыхательные практики", approach: "Мы изучаем понятные техники и сразу замечаем, как меняются состояние, ритм и качество внимания.", focus: ["Свободное дыхание", "Ясность", "Устойчивость"] },
+          en: { name: "Dmitry Orlov", specialty: "Breathwork", alt: "Dmitry Orlov in a full sand training tracksuit", quote: "Breath is the simplest way back to yourself.", bio: "Dmitry shows how breathing can support energy, focus, and steadiness throughout the day.", experience: "9 years", format: "Group & private", direction: "Breathwork", approach: "We learn clear techniques and notice how they change state, rhythm, and the quality of attention.", focus: ["Free breathing", "Clarity", "Steadiness"] }
+        },
+        olga: {
+          image: "optimized/teacher-olga.jpg",
+          ru: { name: "Ольга Новикова", specialty: "Растяжка", alt: "Ольга Новикова в полном шалфейном костюме для йоги", quote: "Гибкость растёт там, где есть время и забота.", bio: "Ольга помогает безопасно возвращать телу лёгкость, подвижность и доверие к собственным ощущениям.", experience: "6 лет", format: "Группы и персонально", direction: "Растяжка", approach: "Двигаемся медленно и внимательно, оставляя мышцам достаточно пространства для восстановления.", focus: ["Гибкость", "Восстановление", "Лёгкость"] },
+          en: { name: "Olga Novikova", specialty: "Stretching", alt: "Olga Novikova in a full sage yoga tracksuit", quote: "Flexibility grows where there is time and care.", bio: "Olga helps students safely return to ease, mobility, and trust in their own sensations.", experience: "6 years", format: "Group & private", direction: "Stretching", approach: "We move slowly and attentively, giving the muscles room to recover.", focus: ["Flexibility", "Recovery", "Ease"] }
+        },
+        sofia: {
+          image: "optimized/teacher-sofia.jpg",
+          ru: { name: "София Рожкова", specialty: "Функциональная йога", alt: "София Рожкова в полном белом костюме для йоги", quote: "Практика должна поддерживать жизнь, а не усложнять её.", bio: "София соединяет функциональные упражнения и йогу, чтобы движение было сильным, понятным и живым.", experience: "8 лет", format: "Группы и персонально", direction: "Функциональная йога", approach: "Находим баланс между силой, подвижностью и восстановлением — с вниманием к задачам каждого ученика.", focus: ["Сильное тело", "Подвижность", "Энергия"] },
+          en: { name: "Sofia Rozhkova", specialty: "Functional yoga", alt: "Sofia Rozhkova in a full white yoga tracksuit", quote: "Practice should support life, not make it more complicated.", bio: "Sofia combines functional training and yoga so movement feels strong, clear, and alive.", experience: "8 years", format: "Group & private", direction: "Functional yoga", approach: "We balance strength, mobility, and recovery while staying close to each student's goals.", focus: ["Strong body", "Mobility", "Energy"] }
+        }
+      };
+
+      const queryTeacher = new URLSearchParams(location.search).get("teacher");
+      const currentTeacher = teacherData[queryTeacher] ? queryTeacher : "anna";
+      const languageButtons = [...document.querySelectorAll("[data-language]")];
+      const translatableNodes = [...document.querySelectorAll("[data-i18n]")];
+      const getTranslation = (dictionary, key) => key.split(".").reduce((value, part) => value?.[part], dictionary);
+      const teacherImage = document.querySelector("#teacher-image");
+      const teacherName = document.querySelector("#teacher-name");
+      const teacherSpecialty = document.querySelector("#teacher-specialty");
+      const teacherQuote = document.querySelector("#teacher-quote");
+      const teacherBio = document.querySelector("#teacher-bio");
+      const teacherExperience = document.querySelector("#teacher-experience");
+      const teacherFormat = document.querySelector("#teacher-format");
+      const teacherDirection = document.querySelector("#teacher-direction");
+      const teacherApproach = document.querySelector("#teacher-approach");
+      const teacherFocus = document.querySelector("#teacher-focus");
+      const teacherCta = document.querySelector("#teacher-cta");
+      const relatedGrid = document.querySelector("#related-grid");
+
+      function renderRelated(language) {
+        relatedGrid.innerHTML = Object.entries(teacherData).map(([key, item]) => `<a class="related-card" href="teacher.html?teacher=${key}"><img src="${item.image}" srcset="${item.image.replace(".jpg","-sm.jpg")} 1x, ${item.image} 2x" alt="${item[language].alt}" loading="lazy" /><span class="related-card__copy"><span class="related-card__title">${item[language].name}</span><span class="related-card__tag">${item[language].specialty}</span></span></a>`).join("");
+      }
+
+      function setLanguage(language) {
+        const selectedLanguage = uiTranslations[language] ? language : "ru";
+        const dictionary = uiTranslations[selectedLanguage];
+        const teacher = teacherData[currentTeacher][selectedLanguage];
+        localStorage.setItem("mova-language", selectedLanguage);
+        translatableNodes.forEach((node) => { const value = getTranslation(dictionary, node.dataset.i18n); if (value !== undefined) node.textContent = value; });
+        languageButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.language === selectedLanguage)));
+        document.documentElement.lang = selectedLanguage;
+        document.title = `${teacher.name} — MOVA`;
+        document.querySelector(".nav").setAttribute("aria-label", dictionary.meta.nav);
+        document.querySelector(".language-switch").setAttribute("aria-label", dictionary.meta.language);
+        teacherImage.src = teacherData[currentTeacher].image;
+        teacherImage.alt = teacher.alt;
+        teacherName.textContent = teacher.name;
+        teacherSpecialty.textContent = teacher.specialty;
+        teacherQuote.textContent = teacher.quote;
+        teacherBio.textContent = teacher.bio;
+        teacherExperience.textContent = teacher.experience;
+        teacherFormat.textContent = teacher.format;
+        teacherDirection.textContent = teacher.direction;
+        teacherApproach.textContent = teacher.approach;
+        teacherFocus.innerHTML = teacher.focus.map((item) => `<li>${item}</li>`).join("");
+        teacherCta.href = `https://wa.me/?text=${encodeURIComponent(selectedLanguage === "en" ? `Hello! I would like to book a class with ${teacher.name} at MOVA.` : `Здравствуйте! Хочу записаться на занятие к преподавателю ${teacher.name} в MOVA.`)}`;
+        renderRelated(selectedLanguage);
+      }
+
+      languageButtons.forEach((button) => button.addEventListener("click", () => setLanguage(button.dataset.language)));
+      setLanguage(localStorage.getItem("mova-language") || "ru");
+    </script>
+  </body>
+</html>
